@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/amazeui.min.css" />
+    <link rel="stylesheet" href="css/admin.css" />
+</head>
+<title>宿舍信息</title>
+<body>
+<div th:if="${not #strings.isEmpty(dorm)}" class="am-g">
+    <div class="am-u-sm-12">
+        <form class="am-form">
+            <table class="am-table am-table-striped am-table-hover table-main">
+                <thead>
+                <tr>
+
+                    <th class="table-title">宿舍号</th>
+                    <th class="table-title">最大人数</th>
+                    <th class="table-title">已住人数</th>
+                    <th class="table-title">所属楼层</th>
+                    <th class="table-title">所属楼宇</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+
+                    <td th:text="${dorm.getDormnum()}"></td>
+                    <td th:text="${dorm.getMaxpeople()}"></td>
+                    <td th:text="${dorm.getExistedpeople()}"></td>
+                    <td th:text="${dorm.getFloor()}"></td>
+                    <td th:text="${dorm.getHostel()}"></td>
+                </tr>
+                </tbody>
+            </table>
+            <hr>
+        </form>
+        <p style="text-align: center;color: #2cb7fd">入住详情</p>
+        <form class="am-form">
+            <table class="am-table am-table-striped am-table-hover table-main">
+                <thead>
+                <tr>
+
+                    <th class="table-title">学号</th>
+                    <th class="table-title">姓名</th>
+                    <th class="table-title">性别</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="student:${students}">
+
+                    <td th:text="${student.getStudentnumber()}"></td>
+                    <td th:text="${student.getName()}"></td>
+                    <td th:text="${student.getSex()}"></td>
+                </tr>
+                </tbody>
+            </table>
+            <hr>
+        </form>
+    </div>
+</div>
+<h1 style="color:red;text-align: center" th:if="${#strings.isEmpty(dorm)}">该宿舍不存在</h1>
+</body>
+
+</html>

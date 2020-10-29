@@ -1,0 +1,15 @@
+spring:
+  thymeleaf:
+    cache: false
+  datasource:
+    username: root
+    password:
+    url: jdbc:mysql://localhost:3306/hostelmanagement?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+
+
+#\u6574\u5408mybatis
+mybatis:
+  type-aliases-package: szl.springboothelloword.pojo
+  mapper-locations: classpath:mybatis/mapper/*.xml

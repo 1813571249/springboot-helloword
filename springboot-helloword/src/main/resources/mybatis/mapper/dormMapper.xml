@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="szl.springboothelloword.mapper.dormMapper">
+
+    <select id="queryDormList" resultType="dorm">
+        select * from dorm
+    </select>
+
+    <update id="updateDorm" parameterType="String">
+        UPDATE dorm SET existedpeople=existedpeople-1 WHERE dormnum=#{arg0}
+    </update>
+
+    <select id="queryById" parameterType="String" resultType="dorm">
+        select * from dorm WHERE dormnum=#{arg0}
+    </select>
+
+    <update id="addStudent" parameterType="String">
+        UPDATE dorm SET existedpeople=existedpeople+1 WHERE dormnum=#{arg0}
+    </update>
+
+    <update id="clear">
+        UPDATE dorm SET existedpeople=existedpeople-#{arg1} WHERE dormnum=#{arg0}
+    </update>
+</mapper>

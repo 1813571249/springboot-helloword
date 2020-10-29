@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="css/amazeui.min.css" />
+		<link rel="stylesheet" href="css/admin.css" />
+	</head>
+
+	<body>
+		<div class="admin-content-body">
+			<div class="am-cf am-padding am-padding-bottom-0">
+				<div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">学生管理</strong><small></small></div>
+			</div>
+
+			<hr>
+
+			<div class="am-g">
+				<div class="am-u-sm-12 am-u-md-6">
+					<div class="am-btn-toolbar">
+						<div class="am-btn-group am-btn-group-xs">
+							<button type="button" class="btnedit3 am-btn am-btn-default"><span class="am-icon-plus"></span> 新增</button>
+						</div>
+					</div>
+				</div>
+				<div class="am-u-sm-12 am-u-md-3">
+
+				</div>
+				<div class="am-u-sm-12 am-u-md-3">
+					<div class="am-input-group am-input-group-sm">
+						<input type="text" value="" class="am-form-field" placeholder="输入学号进行搜索" id="text">
+						<span class="am-input-group-btn">
+            <button class="btnedit am-btn am-btn-default" type="button">搜索</button>
+          </span>
+					</div>
+				</div>
+			</div>
+			<div class="am-g">
+				<div class="am-u-sm-12">
+					<form class="am-form">
+						<table class="am-table am-table-striped am-table-hover table-main">
+							<thead>
+								<tr>
+									<th class="table-check"><input type="checkbox"></th>
+									<th class="table-id">ID</th>
+									<th class="table-title">学号</th>
+									<th class="table-title">姓名</th>
+									<th class="table-title">性别</th>
+									<th class="table-title">所属寝室</th>
+									<th class="table-set">操作</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="student:${students}">
+									<td><input type="checkbox"></td>
+									<td th:text="${student.getId()}"></td>
+									<td th:text="${student.getStudentnumber()}"></td>
+									<td th:text="${student.getName()}"></td>
+									<td th:text="${student.getSex()}"></td>
+									<td th:text="${student.getDorm()}"></td>
+									<td>
+										<div class="am-btn-toolbar">
+											<div class="am-btn-group am-btn-group-xs">
+												<a th:href="@{'/updateStudent?studentID='+${student.getStudentnumber()}}" class="am-btn am-btn-default am-btn-xs am-text-secondary">
+													<span class="am-icon-pencil-square-o"></span> 退寝
+												</a>
+
+												<a th:href="@{'/deleteStudent?studentID='+${student.getStudentnumber()}}" class="am-btn am-btn-default am-btn-xs am-text-secondary">
+													<span class="am-icon-pencil-square-o"></span> 删除
+												</a>
+
+											</div>
+										</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+
+						<hr>
+					</form>
+				</div>
+
+			</div>
+		</div>
+		<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+		<script type="text/javascript" src="myplugs/js/plugs.js"></script>
+		<script>
+
+            
+            $( function(){
+                $(".btnedit").click(function() {
+                    var id=document.getElementById("text").value;
+
+                    $.jq_Panel({
+                        title: "提示",
+                        iframeWidth: 500,
+                        iframeHeight: 300,
+                        url: "student.html?studentID="+id
+                    });
+                });
+
+
+            })
+		</script>
+
+        <script>
+            $( function(){
+                $(".btnedit3").click(function() {
+
+                    $.jq_Panel({
+                        title: "新增学生",
+                        iframeWidth: 500,
+                        iframeHeight: 300,
+                        url: "addStudent.html"
+                    });
+                });
+
+
+            })
+        </script>
+	
+	</body>
+
+</html>

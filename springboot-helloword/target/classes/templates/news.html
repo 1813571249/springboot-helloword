@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="css/amazeui.min.css" />
+		<link rel="stylesheet" href="css/admin.css" />
+	</head>
+
+	<body>
+		<div class="admin-content-body">
+			<div class="am-cf am-padding am-padding-bottom-0">
+				<div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">宿舍管理</strong><small></small></div>
+			</div>
+
+			<hr>
+
+			<div class="am-g">
+				<div class="am-u-sm-12 am-u-md-6">
+					<div class="am-btn-toolbar">
+						<div class="am-btn-group am-btn-group-xs">
+							<button type="button" class="btnedit am-btn am-btn-default">
+								<span class="am-icon-plus"></span> 入住
+							</button>
+						</div>
+					</div>
+				</div>
+				<div class="am-u-sm-12 am-u-md-3">
+
+				</div>
+				<div class="am-u-sm-12 am-u-md-3">
+					<div class="am-input-group am-input-group-sm">
+						<input type="text" class="am-form-field" placeholder="输入宿舍号进行搜索" value="" id="text">
+						<span class="am-input-group-btn">
+            <button class="btnedit3 am-btn am-btn-default"  type="button">搜索</button>
+          </span>
+					</div>
+				</div>
+			</div>
+			<div class="am-g">
+				<div class="am-u-sm-12">
+					<form class="am-form">
+						<table class="am-table am-table-striped am-table-hover table-main">
+							<thead>
+								<tr>
+									<th class="table-check"><input type="checkbox"></th>
+									<th class="table-id">ID</th>
+									<th class="table-title">宿舍编号</th>
+									<th class="table-type">最大人数</th>
+									<th class="table-type">已住人数</th>
+									<th class="table-author am-hide-sm-only">所属楼层</th>
+									<th class="table-date am-hide-sm-only">所属楼宇</th>
+									<th class="table-set">操作</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="dorm:${dorms}">
+									<td><input type="checkbox"></td>
+									<td th:text="${dorm.getId()}"></td>
+									<td>
+										<a href="#" th:text="${dorm.getDormnum()}"></a>
+									</td>
+									<td th:text="${dorm.getMaxpeople()}"></td>
+									<td th:text="${dorm.getExistedpeople()}"></td>
+									<td class="am-hide-sm-only" th:text="${dorm.getFloor()}"></td>
+									<td class="am-hide-sm-only" th:text="${dorm.getHostel()}"></td>
+									<td>
+										<div class="am-btn-toolbar">
+											<div class="am-btn-group am-btn-group-xs">
+												<a th:href="@{'/clear?dorm='+${dorm.getDormnum()}}" class="am-btn am-btn-default am-btn-xs am-text-secondary">
+													<span class="am-icon-pencil-square-o">
+													</span> 清空寝室
+												</a>
+											</div>
+										</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+
+						<hr>
+					</form>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+		<script type="text/javascript" src="myplugs/js/plugs.js"></script>
+		<script>
+            $( function(){
+                $(".btnedit").click(function() {
+
+                    $.jq_Panel({
+                        title: "入住寝室",
+                        iframeWidth: 500,
+                        iframeHeight: 300,
+                        url: "live.html"
+                    });
+                });
+
+
+            })
+		</script>
+
+
+		<script>
+            $( function(){
+                $(".btnedit3").click(function() {
+
+                    var id=document.getElementById("text").value;
+
+                    $.jq_Panel({
+                        title: "搜索寝室",
+                        iframeWidth: 500,
+                        iframeHeight: 300,
+                        url: "dorm.html?dormId="+id
+                    });
+                });
+
+
+            })
+		</script>
+
+	</body>
+</html>

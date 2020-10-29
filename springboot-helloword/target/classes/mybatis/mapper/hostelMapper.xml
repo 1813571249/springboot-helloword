@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="szl.springboothelloword.mapper.hostelMapper">
+
+    <select id="queryHostelList" resultType="hostel">
+        select * from hostel
+    </select>
+
+    <update id="updateHostel" parameterType="Integer">
+        UPDATE hostel SET existedpeople=existedpeople-1 WHERE id=#{arg0}
+    </update>
+
+    <update id="addStudent" parameterType="Integer">
+        UPDATE hostel SET existedpeople=existedpeople+1 WHERE id=#{arg0}
+    </update>
+
+    <update id="clear" parameterType="Integer">
+        UPDATE hostel SET existedpeople=existedpeople-#{arg1} WHERE id=#{arg0}
+    </update>
+</mapper>

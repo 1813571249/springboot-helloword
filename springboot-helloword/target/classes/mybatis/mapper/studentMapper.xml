@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="szl.springboothelloword.mapper.studentMapper">
+
+    <select id="queryStudentList" resultType="student">
+        select * from student
+    </select>
+
+    <select id="queryBydorm" parameterType="String" resultType="student">
+        select * from student WHERE dorm=#{arg0}
+    </select>
+
+    <select id="queryByStudentID" parameterType="String" resultType="student">
+        select * from student WHERE studentnumber=#{arg0}
+    </select>
+
+    <update id="updateByStudentID" parameterType="String">
+        UPDATE student SET dorm=NULL WHERE studentnumber=#{arg0}
+    </update>
+
+    <update id="studentLive" parameterType="String">
+        UPDATE student SET dorm=#{arg1} WHERE studentnumber=#{arg0}
+    </update>
+
+    <delete id="deleteByStudentID" parameterType="String">
+        delete from student where studentnumber=#{arg0}
+    </delete>
+
+    <insert id="addStudent" parameterType="String" >
+        INSERT INTO student (studentnumber,name,sex) VALUES (#{arg0},#{arg1},#{arg2})
+    </insert>
+
+</mapper>
